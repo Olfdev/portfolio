@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/header'
+import Footer from './components/footer'
+import Home from './pages/home'
+import Admin from './pages/admin'
+import Error from './pages/error'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 
-function App() {
+export default function App() {
+  const isAuthenticated = true
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={(isAuthenticated) ? <Admin /> : <Navigate to="/" />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      <Footer />
+    </Router>
+  )
 }
-
-export default App;
