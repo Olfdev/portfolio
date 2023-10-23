@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { addDoc } from "@firebase/firestore"
 import { collref } from "../firebase/firebase"
 import DatePicker from "react-datepicker"
@@ -8,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css"
 
 export default function Admin() {
     registerLocale('fr', fr)
+
+    const userEmail = useSelector((state) => state.user.email)
 
     const titleRef = useRef()
     const descriptionRef = useRef()
@@ -55,37 +58,40 @@ export default function Admin() {
     }
 
     return (
-        <form className="form-admin" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-            <DatePicker
-                locale="fr"
-                selected={date}
-                onChange={(selectedDate) => setDate(selectedDate)}
-                dateFormat="dd/MM/yyyy"
-                placeholderText="Date"
-            />
-            <input type="text" ref={titleRef} placeholder="Title" />
-            <input type="text" ref={descriptionRef} placeholder="Description" />
-
-            {/* Tech input fields */}
-            {techInputs.map((tech, index) => (
-                <input
-                    key={index}
-                    type="text"
-                    placeholder="Tech"
-                    value={tech}
-                    onChange={(event) => handleTechInputChange(index, event)}
+        <>
+            <h1>Hello, {userEmail}</h1>
+            <form className="form-admin" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+                <DatePicker
+                    locale="fr"
+                    selected={date}
+                    onChange={(selectedDate) => setDate(selectedDate)}
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="Date"
                 />
-            ))}
+                <input type="text" ref={titleRef} placeholder="Title" />
+                <input type="text" ref={descriptionRef} placeholder="Description" />
 
-            {/* Button to add more tech fields */}
-            <button type="button" onClick={handleAddTechInput}>+ Add Tech</button>
+                {/* Tech input fields */}
+                {techInputs.map((tech, index) => (
+                    <input
+                        key={index}
+                        type="text"
+                        placeholder="Tech"
+                        value={tech}
+                        onChange={(event) => handleTechInputChange(index, event)}
+                    />
+                ))}
 
-            <input type="text" ref={desktopImgRef} placeholder="Desktop Image" />
-            <input type="text" ref={mobileImgRef} placeholder="Mobile Image" />
-            <input type="text" ref={weblinkRef} placeholder="Web Link" />
-            <input type="text" ref={githublinkRef} placeholder="GitHub Link" />
+                {/* Button to add more tech fields */}
+                <button type="button" onClick={handleAddTechInput}>+ Add Tech</button>
 
-            <button type="submit">Save</button>
-        </form>
+                <input type="text" ref={desktopImgRef} placeholder="Desktop Image" />
+                <input type="text" ref={mobileImgRef} placeholder="Mobile Image" />
+                <input type="text" ref={weblinkRef} placeholder="Web Link" />
+                <input type="text" ref={githublinkRef} placeholder="GitHub Link" />
+
+                <button type="submit">Save</button>
+            </form>
+        </>
     );
 }
