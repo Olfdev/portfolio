@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { collref } from "../firebase/firebase"
 import { getDocs } from "firebase/firestore"
 
-export default function Dummy_home() {
-    //const dummy_home = "dummy_home";
+export default function Home() {
     const [projects, setProjects] = useState([])
-    // get 'projects' collection data
 
     function formatDate(date) {
         const options = { year: 'numeric', month: 'long' }
@@ -32,18 +30,29 @@ export default function Dummy_home() {
                     <h1>{project.title}</h1>
                     <p>{formatDate(project.date)}</p>
                     <p>{project.description}</p>
-                    <p>Technologies utilisées:</p>
-                    {project.tech.map((tech, index) => (
-                        <p key={index}>{tech}</p>
-                    ))}
-                    <p>Images du projet</p>
-                    {Object.keys(project.images).map((key) => (
-                        <p key={key}>
-                            {key.charAt(0).toUpperCase() + key.slice(1)} Image: {project.images[key]}
-                        </p>
-                    ))}
-                    <p>Lien du site: {project.weblink}</p>
-                    <p>Lien Github du code: {project.githublink}</p>
+                    <div className='icons-container'>
+                        {project.tech
+                            .sort()
+                            .map((icon) => (
+                                <div className="icons-select" aria-label={`${icon}`} key={icon}>
+                                    <img src={`../icons/${icon}.svg`} alt={`Icon ${icon}`} />
+                                </div>
+                            ))}
+                    </div>
+                    {Object.keys(project.images)
+                        .sort()
+                        .map((desktopOrMobile) => (
+                            <div className={`${desktopOrMobile}-container`} key={desktopOrMobile}>
+                                <div className={`peripheral-screen ${desktopOrMobile === 'mobile' ? 'mobile' : ''}`}>
+                                    {desktopOrMobile === 'mobile' && <div className={`${desktopOrMobile}-top-bar`}></div>}
+                                    <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} screen`} />
+                                </div>
+
+                                {desktopOrMobile === 'mobile' && <div className={`${desktopOrMobile}-button`}></div>}
+                            </div>
+                        ))}
+                    <a className="link-icon" href={project.weblink} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-house"></i></a>
+                    <a className="link-icon" href={project.githublink} target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-github"></i></a>
                 </div>
             ))
             }

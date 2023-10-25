@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { useDispatch } from 'react-redux'
-import { setUserEmail } from '../rtk/userSlice'
+import { setUserName } from '../rtk/userSlice'
 
-const SignIn = () => {
+export default function SignIn() {
 
     const dispatch = useDispatch();
     const [email, setEmail] = useState("")
@@ -16,9 +16,8 @@ const SignIn = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user
-                console.log(user.email)
-                const userEmail = user.email
-                dispatch(setUserEmail(userEmail))
+                const userName = user.displayName
+                dispatch(setUserName(userName))
             })
             .catch((error) => {
                 const errorCode = error.code
@@ -52,5 +51,3 @@ const SignIn = () => {
         </div>
     );
 };
-
-export default SignIn;
