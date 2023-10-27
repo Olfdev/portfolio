@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const puppeteer = require('puppeteer');
+const sharp = require('sharp');
 
 const app = express();
 const port = 3001;
@@ -10,7 +11,8 @@ app.use(cors({ origin: '*' }));
 
 app.post('/', async (req, res) => {
     try {
-        const { url } = req.body;
+        const url = req.body.url;
+        const delay = req.body.delay;
 
         const browser = await puppeteer.launch({ headless: 'new' });
         const page = await browser.newPage();
@@ -21,8 +23,8 @@ app.post('/', async (req, res) => {
         // Set viewport for desktop mode
         await page.setViewport({ width: 1920, height: 1080 });
 
-        // Add a 5000 milliseconds delay to make sure the page is properly loaded
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        // Add a delay to make sure the page is properly loaded
+        await new Promise(resolve => setTimeout(resolve, delay));
 
         // Take desktop screenshot
         const desktopScreenshot = await page.screenshot();
@@ -35,11 +37,20 @@ app.post('/', async (req, res) => {
 
         await browser.close();
 
+        // Resize the screenshots using sharp
+        const resizedDesktopScreenshot = await sharp(desktopScreenshot)
+            .resize({ width: 960 })
+            .toBuffer();
+
+        const resizedMobileScreenshot = await sharp(mobileScreenshot)
+            .resize({ width: 200 })
+            .toBuffer();
+
         res.json({
-            desktopScreenshot: desktopScreenshot.toString('base64'),
-            mobileScreenshot: mobileScreenshot.toString('base64'),
+            desktopScreenshot: resizedDesktopScreenshot.toString('base64'),
+            mobileScreenshot: resizedMobileScreenshot.toString('base64'),
         });
-        console.log("screenshots successfuly taken");
+        console.log("Screenshots successfully taken and resized");
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

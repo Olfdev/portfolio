@@ -2,7 +2,7 @@ import Header from './components/header'
 import Footer from './components/footer'
 import Home from './pages/home'
 import Login from './pages/login'
-import Admin from './pages/admin'
+import Admin from './components/createcard'
 import Error from './pages/error'
 import Name from './pages/name'
 import { useEffect, useState } from 'react'
@@ -11,7 +11,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [isLoading, setIsLoading] = useState(true); // Added loading state
+  const [isLoading, setIsLoading] = useState(true)
+  const [userName, setUserName] = useState('')
 
   useEffect(() => {
     // Initialize Firebase Authentication
@@ -21,25 +22,26 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsAuthenticated(true)
+        setUserName(user.displayName || '')
         console.log("You are logged in")
       } else {
         setIsAuthenticated(false)
         console.log("You are not logged in")
       }
       setIsLoading(false); // Set loading state to false when the check is complete
-    });
+    })
 
     return () => unsubscribe()
-  }, []);
+  }, [])
 
   if (isLoading) {
     // Return loading UI until authentication check is complete
-    return <h1>Loading...</h1>;
+    return <h1>Loading...</h1>
   }
 
   return (
     <Router>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} userName={userName} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

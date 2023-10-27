@@ -39,30 +39,139 @@ ul {
 body {
     color: #fff;
     background-color: #183153;
+    //max-width: 1440px;
+    max-width: 1800px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.link-icon {
-    margin: 0 1rem 0 0;
-    font-size: xx-large;
+.signout-btn {
+    cursor: pointer;
+    width: fit-content;
 }
 
 .cards-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    //width: 410px;
+    width: 532px;
     background-color: #2e5e9f;
-    border-style: dotted;
+    border-radius: 1rem;
     margin: 2rem;
     padding: 1rem;
+    overflow-wrap: break-word;
+    //box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    //box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+
+    &.add {
+        font-size: 20rem;
+        cursor: pointer;
+        text-align: center;
+        justify-content: center;
+    }
+
+    h1 {
+        margin-block: 1rem;
+    }
+}
+
+.card-add-container {
+    display: flex;
+}
+
+.card-edit-delete-icons {
+    font-size: x-large;
+    width: fit-content;
+    position: absolute;
+    right: 16px;
+
+    .fa-solid {
+        font-weight: 100;
+        margin-left: 1rem;
+        cursor: pointer;
+    }
+}
+
+.card-mask {
+    background-color: #000000f5;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delete-yes-no-container {
+    display: inline-flex;
+    margin: 2rem;
+}
+
+.delete-text {
+    font-size: xx-large;
+    padding: 1rem 2rem 0.85rem;
+    margin-inline: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #545454;
+    }
+
+    &.yes {
+        background-color: #be0404;
+
+        &:hover {
+            background-color: #810000;
+        }
+    }
+}
+
+.form-admin {
+    display: contents;
+}
+
+.react-datepicker__input-container input {
+    text-transform: capitalize;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #fff;
+}
+
+.icons-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    // grid-column-gap: 26px;
+    grid-row-gap: 10px;
+    justify-items: center;
+    margin-block: 3rem;
+
+    &.admin {
+        margin-block: 1.4rem;
+    }
 }
 
 .peripheral-screen {
     color: #000;
     background-color: #000;
-    width: fit-content;
-    height: 20rem;
+    height: 14rem;
     border-style: solid;
     border-width: 1rem;
     border-radius: 1rem;
@@ -85,86 +194,116 @@ body {
     }
 }
 
-// .desktop-screen {
-//     color: #000;
-//     background-color: #000;
-//     width: fit-content;
-//     height: 20rem;
-//     border-style: solid;
-//     border-width: 1rem;
-//     border-radius: 1rem;
-//     overflow: hidden;
-//     box-shadow: rgb(38, 57, 77) 0px 8px 15px 0px;
+.peripherals-container {
+    display: flex;
+    gap: 10px;
+}
 
-//     img {
-//         height: 100%;
-//     }
-// }
+.desktop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.desktop-detail {
+    height: 10px;
+    width: 220px;
+    background-color: #000;
+    transform: translateY(-3px) perspective(4px) rotateX(3deg);
+    border-radius: 1rem;
+}
 
 .mobile-container {
     position: relative;
     width: fit-content;
     display: flex;
     justify-content: center;
-    margin: 1rem 0;
+    //align-self: center;
+    //margin: 1rem 0;
 }
 
-// .mobile-screen {
-//     color: #000;
-//     background-color: #000;
-//     width: fit-content;
-//     height: 20rem;
-//     border-style: solid;
-//     border-width: 0.5rem;
-//     border-radius: 1.5rem;
-//     overflow: hidden;
-//     box-shadow: rgb(38, 57, 77) 0px 8px 15px 0px;
-
-//     .mobile-top-bar {
-//         background-color: #000;
-//         width: 100%;
-//         height: 15px;
-//     }
-
-//     img {
-//         height: 100%;
-//     }
-// }
-
-.mobile-button {
+.mobile-detail {
     background-color: #333;
     position: absolute;
     transform: translateY(10px);
-    top: 0;
     width: 7px;
     height: 7px;
-    transform-origin: center;
     border-radius: 1rem;
 }
 
-.form-admin {
-    color: #000;
+.links-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    margin-block: 1rem;
+    justify-content: space-evenly;
+    margin-top: 3rem;
+    height: -moz-available;
+    height: -webkit-fill-available;
+    align-items: flex-end;
 }
 
-.icons-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    justify-items: center;
+.link-icon {
+    font-size: 50px;
+}
 
-    &.admin {
-        background-color: #fff;
+textarea {
+    resize: none;
+}
+
+input,
+textarea {
+    border: dashed;
+    border-width: thin;
+    border-color: #000;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #fff;
+}
+
+.input {
+
+    &.github {
+        margin-bottom: 1rem;
     }
+
+    &.p {
+        font-size: 1rem;
+    }
+
+    &.h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-block: 1rem;
+    }
+}
+
+.delay-button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-screenshots,
+.button-add {
+    background-color: #183153;
+    border: none;
+    border-radius: 1em;
+    padding: 1em;
+    margin-block: 1rem;
+    width: fit-content;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button-add {
+    color: greenyellow;
+    font-size: larger;
+    align-self: center;
+    width: -webkit-fill-available;
 }
 
 .icons-select {
     position: relative;
-    padding: 10px;
-    margin: 5px;
     width: 50px;
     height: 50px;
     display: flex;
@@ -183,7 +322,7 @@ body {
         z-index: 1;
         white-space: nowrap;
         padding: 5px 14px;
-        background: #413219;
+        background: #000;
         color: #fff;
         border-radius: 4px;
         font-size: 0.8rem;
@@ -191,17 +330,6 @@ body {
 
     &[aria-label]:focus {
         outline: none;
-    }
-
-    &[aria-label]:hover::before,
-    &[aria-label]:focus::before {
-        content: "▼";
-        position: absolute;
-        top: -0.7em;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 20px;
-        color: #413219;
     }
 
     &.admin {

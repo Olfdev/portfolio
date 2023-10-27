@@ -1,23 +1,23 @@
 import React, { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { useDispatch } from 'react-redux'
-import { setUserName } from '../rtk/userSlice'
 
 export default function SignIn() {
 
-    const dispatch = useDispatch();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
 
-    const handleSignIn = () => {
+    const navigate = useNavigate();
+
+    const handleSignIn = (e) => {
+        e.preventDefault();
         const auth = getAuth()
+
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(() => {
                 // Signed in
-                const user = userCredential.user
-                const userName = user.displayName
-                dispatch(setUserName(userName))
+                navigate('/');
             })
             .catch((error) => {
                 const errorCode = error.code
@@ -30,24 +30,29 @@ export default function SignIn() {
     return (
         <div>
             <h2>Sign In</h2>
-            <div>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            {error && <p>{error}</p>}
-            <button onClick={handleSignIn}>Sign In</button>
+            <form onSubmit={handleSignIn}>
+                <div>
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        autoComplete="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                {error && <p>{error}</p>}
+                {/* <button onClick={handleSignIn}>Sign In</button> */}
+                <button type="submit">Sign In</button>
+            </form>
         </div>
     );
 };
