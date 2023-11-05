@@ -17,11 +17,11 @@ export default function UpdateDisplayName() {
                 })
                 .catch(error => {
                     console.error('Error updating display name: ', error)
-                });
+                })
         } else {
             console.error('No user is logged in.')
         }
-    };
+    }
 
     return (
         <div>

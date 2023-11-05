@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 * {
   font-family: "Varela Round", sans-serif;
   list-style-type: none;
@@ -42,9 +43,67 @@ body {
   margin-left: auto;
 }
 
-.signout-btn {
-  cursor: pointer;
-  width: fit-content;
+.react-datepicker {
+  background-color: #2e5e9f !important;
+}
+
+.react-datepicker__input-container input {
+  text-transform: capitalize;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker__header {
+  background-color: #274f85 !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #fff !important;
+}
+
+.react-datepicker__current-month {
+  color: #fff !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: #fff !important;
+}
+
+.react-datepicker__day-name {
+  color: #fff !important;
+}
+
+.react-datepicker__day--selected {
+  background-color: #274f85 !important;
+}
+.react-datepicker__day--selected:hover {
+  color: #000;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #274f85 !important;
+  color: #000 !important;
+}
+
+header,
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 3em;
+}
+header h2,
+footer h2 {
+  font-size: larger;
+}
+
+.user-container {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .cards-container {
@@ -58,11 +117,13 @@ body {
   flex-direction: column;
   position: relative;
   width: 532px;
+  height: 880px;
   background-color: #2e5e9f;
   border-radius: 1rem;
   margin: 2rem;
   padding: 1rem;
   overflow-wrap: break-word;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 .card.add {
   font-size: 20rem;
@@ -73,6 +134,10 @@ body {
 .card h1 {
   margin-block: 1rem;
 }
+.card .card-desc {
+  min-height: 100px;
+  overflow-y: auto;
+}
 
 .card-add-container {
   display: flex;
@@ -80,7 +145,6 @@ body {
 
 .card-edit-delete-icons {
   font-size: x-large;
-  width: fit-content;
   position: absolute;
   right: 16px;
 }
@@ -107,11 +171,6 @@ body {
   flex-direction: column;
 }
 
-.delete-yes-no-container {
-  display: inline-flex;
-  margin: 2rem;
-}
-
 .delete-text {
   font-size: xx-large;
   padding: 1rem 2rem 0.85rem;
@@ -133,10 +192,6 @@ body {
   display: contents;
 }
 
-.react-datepicker__input-container input {
-  text-transform: capitalize;
-}
-
 input::placeholder,
 textarea::placeholder {
   color: #fff;
@@ -148,10 +203,7 @@ textarea::placeholder {
   grid-template-rows: repeat(3, 1fr);
   grid-row-gap: 10px;
   justify-items: center;
-  margin-block: 3rem;
-}
-.icons-container.admin {
-  margin-block: 1.4rem;
+  margin-block: 2em;
 }
 
 .peripheral-screen {
@@ -163,6 +215,7 @@ textarea::placeholder {
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: rgb(38, 57, 77) 0px 8px 15px 0px;
+  width: 373px;
 }
 .peripheral-screen img {
   height: 100%;
@@ -170,6 +223,7 @@ textarea::placeholder {
 .peripheral-screen.mobile {
   border-width: 0.5rem;
   border-radius: 1.5rem;
+  width: 115px;
 }
 .peripheral-screen.mobile .mobile-top-bar {
   background-color: #000;
@@ -180,6 +234,7 @@ textarea::placeholder {
 .peripherals-container {
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 
 .desktop-container {
@@ -232,7 +287,7 @@ textarea {
 
 input,
 textarea {
-  border: dashed;
+  border: none;
   border-width: thin;
   border-color: #000;
   padding: 0;
@@ -242,40 +297,49 @@ textarea {
 }
 
 .input.github {
-  margin-bottom: 1rem;
+  margin-block: 1rem;
 }
 .input.p {
   font-size: 1rem;
+  background: rgba(0, 0, 0, 0.1607843137);
 }
 .input.h1 {
   font-size: 2rem;
   font-weight: 700;
   margin-block: 1rem;
+  background: rgba(0, 0, 0, 0.1607843137);
 }
 
-.delay-button-container {
+.fa-spinner {
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.login-card-container {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: center;
 }
 
-.button-screenshots,
-.button-add {
-  background-color: #183153;
-  border: none;
-  border-radius: 1em;
-  padding: 1em;
+.login-title {
+  text-align: center;
+}
+
+.login-container {
+  display: flex;
+  gap: 0.3rem;
+  flex-direction: column;
   margin-block: 1rem;
-  width: fit-content;
-  color: #fff;
-  cursor: pointer;
 }
 
-.button-add {
-  color: greenyellow;
-  font-size: larger;
-  align-self: center;
-  width: -webkit-fill-available;
+.login-error {
+  color: #ff8484;
 }
 
 .icons-select {
@@ -313,6 +377,108 @@ textarea {
 }
 .icons-select img {
   width: 35px;
+}
+
+.signout-btn {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.delete-yes-no-container {
+  display: inline-flex;
+  margin: 2rem;
+}
+
+.delay-generate-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block: 1em;
+}
+
+.two-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: 2rem;
+  margin-block: 0.5em;
+}
+
+.button-cancel {
+  color: #fff;
+  font-size: larger;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 1em;
+  padding-block: 0.5em;
+  background-color: transparent;
+  border: none;
+}
+.button-cancel:hover {
+  background-color: #545454;
+}
+
+.button-screenshots,
+.button-ok,
+.button-signout {
+  background-color: #183153;
+  border: none;
+  border-radius: 1em;
+  padding-block: 0.5em;
+  width: 246px;
+  color: #fff;
+  cursor: pointer;
+  grid-column: 2/span 2;
+}
+.button-screenshots:hover,
+.button-ok:hover,
+.button-signout:hover {
+  background-color: #0d1c2f;
+}
+.button-screenshots:disabled,
+.button-ok:disabled,
+.button-signout:disabled {
+  cursor: not-allowed;
+}
+.button-screenshots:disabled:hover,
+.button-ok:disabled:hover,
+.button-signout:disabled:hover {
+  background-color: #183153;
+}
+
+.button-screenshots.disabled {
+  background-color: #0d1c2f;
+  cursor: auto;
+}
+.button-screenshots.disabled:hover {
+  background-color: #0d1c2f;
+}
+.button-screenshots.error {
+  color: #ff8484;
+  background-color: #0d1c2f;
+  cursor: auto;
+}
+.button-screenshots.error:hover {
+  background-color: #0d1c2f;
+}
+.button-screenshots.ok {
+  color: #adff2f;
+  background-color: #0d1c2f;
+  cursor: auto;
+}
+.button-screenshots.ok:hover {
+  background-color: #0d1c2f;
+}
+
+.button-ok {
+  color: #adff2f;
+  font-size: larger;
+  width: -webkit-fill-available;
+  text-align: center;
+}
+
+.button-signout {
+  width: auto;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,54 +1,4 @@
-* {
-    font-family: 'Varela Round', sans-serif;
-    list-style-type: none;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    box-sizing: border-box;
-    user-select: none;
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
-    -webkit-tap-highlight-color: transparent;
-    text-decoration: none;
-
-    &:visited {
-        text-decoration: none;
-    }
-
-    a,
-    a:hover,
-    a:focus,
-    a:active {
-        text-decoration: none;
-        color: inherit;
-    }
-}
-
-*::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
-ul {
-    padding: 0;
-}
-
-body {
-    color: #fff;
-    background-color: #183153;
-    //max-width: 1440px;
-    max-width: 1800px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.signout-btn {
-    cursor: pointer;
-    width: fit-content;
-}
+@use 'setup';
 
 .cards-container {
     display: flex;
@@ -60,14 +10,14 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    //width: 410px;
     width: 532px;
-    background-color: #2e5e9f;
+    height: 880px;
+    background-color: setup.$lightblue;
     border-radius: 1rem;
     margin: 2rem;
     padding: 1rem;
     overflow-wrap: break-word;
-    //box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     //box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
 
     &.add {
@@ -80,6 +30,11 @@ body {
     h1 {
         margin-block: 1rem;
     }
+
+    .card-desc {
+        min-height: 100px;
+        overflow-y: auto;
+    }
 }
 
 .card-add-container {
@@ -88,7 +43,6 @@ body {
 
 .card-edit-delete-icons {
     font-size: x-large;
-    width: fit-content;
     position: absolute;
     right: 16px;
 
@@ -116,11 +70,6 @@ body {
     flex-direction: column;
 }
 
-.delete-yes-no-container {
-    display: inline-flex;
-    margin: 2rem;
-}
-
 .delete-text {
     font-size: xx-large;
     padding: 1rem 2rem 0.85rem;
@@ -145,10 +94,6 @@ body {
     display: contents;
 }
 
-.react-datepicker__input-container input {
-    text-transform: capitalize;
-}
-
 input::placeholder,
 textarea::placeholder {
     color: #fff;
@@ -158,14 +103,9 @@ textarea::placeholder {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    // grid-column-gap: 26px;
     grid-row-gap: 10px;
     justify-items: center;
-    margin-block: 3rem;
-
-    &.admin {
-        margin-block: 1.4rem;
-    }
+    margin-block: 2em;
 }
 
 .peripheral-screen {
@@ -177,6 +117,7 @@ textarea::placeholder {
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: rgb(38, 57, 77) 0px 8px 15px 0px;
+    width: 373px;
 
     img {
         height: 100%;
@@ -185,6 +126,7 @@ textarea::placeholder {
     &.mobile {
         border-width: 0.5rem;
         border-radius: 1.5rem;
+        width: 115px;
 
         .mobile-top-bar {
             background-color: #000;
@@ -197,6 +139,7 @@ textarea::placeholder {
 .peripherals-container {
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 .desktop-container {
@@ -218,8 +161,6 @@ textarea::placeholder {
     width: fit-content;
     display: flex;
     justify-content: center;
-    //align-self: center;
-    //margin: 1rem 0;
 }
 
 .mobile-detail {
@@ -251,7 +192,7 @@ textarea {
 
 input,
 textarea {
-    border: dashed;
+    border: none;
     border-width: thin;
     border-color: #000;
     padding: 0;
@@ -263,43 +204,54 @@ textarea {
 .input {
 
     &.github {
-        margin-bottom: 1rem;
+        margin-block: 1rem;
     }
 
     &.p {
         font-size: 1rem;
+        background: #00000029;
     }
 
     &.h1 {
         font-size: 2rem;
         font-weight: 700;
         margin-block: 1rem;
+        background: #00000029;
     }
 }
 
-.delay-button-container {
+.fa-spinner {
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.login-card-container {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    justify-content: center;
 }
 
-.button-screenshots,
-.button-add {
-    background-color: #183153;
-    border: none;
-    border-radius: 1em;
-    padding: 1em;
+.login-title {
+    text-align: center;
+}
+
+.login-container {
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: column;
     margin-block: 1rem;
-    width: fit-content;
-    color: #fff;
-    cursor: pointer;
 }
 
-.button-add {
-    color: greenyellow;
-    font-size: larger;
-    align-self: center;
-    width: -webkit-fill-available;
+.login-error {
+    color: #ff8484;
 }
 
 .icons-select {

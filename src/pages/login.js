@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 export default function SignIn() {
@@ -8,51 +8,54 @@ export default function SignIn() {
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleSignIn = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const auth = getAuth()
 
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 // Signed in
-                navigate('/');
+                navigate('/')
             })
             .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
+                const errorMessage = error.message.replace('Firebase: ', '')
                 setError(errorMessage)
-                console.log(errorCode, errorMessage)
-            });
-    };
+                console.log(errorMessage)
+            })
+    }
 
     return (
-        <div>
-            <h2>Sign In</h2>
-            <form onSubmit={handleSignIn}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        autoComplete="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                {error && <p>{error}</p>}
-                {/* <button onClick={handleSignIn}>Sign In</button> */}
-                <button type="submit">Sign In</button>
-            </form>
+        <div className="login-card-container">
+            <div className="card" >
+                <h1 className="login-title">Sign In</h1>
+                <form onSubmit={handleSignIn}>
+                    <div className="login-container">
+                        <label>Email</label>
+                        <input
+                            className="input p"
+                            type="email"
+                            autoComplete="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="login-container">
+                        <label>Password</label>
+                        <input
+                            className="input p"
+                            type="password"
+                            autoComplete="current-password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    {error && <p className="login-error">{error}</p>}
+                    {/* <button onClick={handleSignIn}>Sign In</button> */}
+                    <button type="submit" className="button-ok">Sign In</button>
+                </form>
+            </div>
         </div>
-    );
-};
+    )
+}

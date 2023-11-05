@@ -2,7 +2,6 @@ import Header from './components/header'
 import Footer from './components/footer'
 import Home from './pages/home'
 import Login from './pages/login'
-import Admin from './components/createcard'
 import Error from './pages/error'
 import Name from './pages/name'
 import { useEffect, useState } from 'react'
@@ -28,7 +27,7 @@ export default function App() {
         setIsAuthenticated(false)
         console.log("You are not logged in")
       }
-      setIsLoading(false); // Set loading state to false when the check is complete
+      setIsLoading(false) // Set loading state to false when the check is complete
     })
 
     return () => unsubscribe()
@@ -46,7 +45,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/admin"
-          element={isAuthenticated ? <Admin /> : <Login />}
+          element={isAuthenticated ? <Home /> : <Login />}
         />
         <Route path="*" element={<Error />} />
         <Route
@@ -56,5 +55,5 @@ export default function App() {
       </Routes>
       <Footer />
     </Router>
-  );
+  )
 }

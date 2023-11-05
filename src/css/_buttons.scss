@@ -1,0 +1,109 @@
+@use 'setup';
+
+.signout-btn {
+    cursor: pointer;
+    width: fit-content;
+}
+
+.delete-yes-no-container {
+    display: inline-flex;
+    margin: 2rem;
+}
+
+.delay-generate-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block: 1em;
+}
+
+.two-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 2rem;
+    margin-block: 0.5em;
+}
+
+.button-cancel {
+    color: #fff;
+    font-size: larger;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 1em;
+    padding-block: 0.5em;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        background-color: #545454;
+    }
+}
+
+.button-screenshots,
+.button-ok,
+.button-signout {
+    background-color: setup.$darkblue;
+    border: none;
+    border-radius: 1em;
+    padding-block: 0.5em;
+    width: 246px;
+    color: #fff;
+    cursor: pointer;
+    grid-column: 2/span 2;
+
+    &:hover {
+        background-color: #0d1c2f;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: setup.$darkblue;
+        }
+    }
+}
+
+.button-screenshots {
+
+    &.disabled {
+        background-color: #0d1c2f;
+        cursor: auto;
+
+        &:hover {
+            background-color: #0d1c2f;
+        }
+    }
+
+    &.error {
+        color: #ff8484;
+        background-color: #0d1c2f;
+        cursor: auto;
+
+        &:hover {
+            background-color: #0d1c2f;
+        }
+    }
+
+    &.ok {
+        color: #adff2f;
+        background-color: #0d1c2f;
+        cursor: auto;
+
+        &:hover {
+            background-color: #0d1c2f;
+        }
+    }
+}
+
+.button-ok {
+    color: #adff2f;
+    font-size: larger;
+    width: -webkit-fill-available;
+    text-align: center;
+}
+
+.button-signout {
+    width: auto;
+}
