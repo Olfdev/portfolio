@@ -11,6 +11,9 @@ src/server/
 # testing
 /coverage
 
+# firebase
+/.firebase
+
 # production
 /build
 
