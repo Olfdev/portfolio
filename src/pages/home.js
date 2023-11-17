@@ -1,17 +1,20 @@
-import { formatDate } from '../utils/formatdate'
+import Description from '../components/description'
+import {formatDate} from '../utils/formatdate'
 import DeleteCard from '../components/deletecard'
 import ManipulateCard from '../components/manipulatecard'
-import { deleteDocument } from '../utils/deletedocument'
-import { deleteImages } from '../utils/deleteimages'
-import React, { useState, useEffect } from "react"
-import { collref } from "../firebase/firebase"
-import { getDocs } from "firebase/firestore"
-import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { getStorage } from 'firebase/storage'
+import {deleteDocument} from '../utils/deletedocument'
+import {deleteImages} from '../utils/deleteimages'
+import React, {useState, useEffect} from "react"
+import {collref} from "../firebase/firebase"
+import {getDocs} from "firebase/firestore"
+import {getAuth, onAuthStateChanged} from "firebase/auth"
+import {getStorage} from 'firebase/storage'
+import ContactForm from '../components/contactform'
 
 export default function Home() {
     const storage = getStorage()
 
+    const [filter, setFilter] = useState('all');
     const [projects, setProjects] = useState([])
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isAddCardClicked, setIsAddCardClicked] = useState(false)
@@ -76,70 +79,89 @@ export default function Home() {
     }
 
     return (
-        <div className="cards-container">
-            {projects
-                .sort((a, b) => b.date - a.date)
-                .map((project) => (
-                    <div className="card" key={project.id}>
-                        {isEditingProject(project) ? (
-                            < ManipulateCard isEditingProject={isEditingProject} project={project} onClose={onClose} storage={storage} deleteImages={deleteImages} setProjects={setProjects} />
-                        ) : (
-                            <>
-                                {isDeletingProject(project) && < DeleteCard onClose={onClose} deleteProject={deleteProject} />}
-                                {isAuthenticated && !editingProject && !deletingProject && !isAddCardClicked && <div className="card-edit-delete-icons">
-                                    <i className="fa-solid fa-pen-to-square" onClick={() => handleEditClick(project)}></i>
-                                    <i className="fa-solid fa-circle-xmark" onClick={() => handleDeleteClick(project)}></i>
-                                </div>}
-                                <p>{formatDate(project.date)}</p>
-                                <h1>{project.title}</h1>
-                                <p className='card-desc collapsed'>{project.description}</p>
-                                <div className='icons-container'>
-                                    {project.tech
-                                        .sort()
-                                        .map((icon) => (
-                                            <div className="icons-select" aria-label={`${icon}`} key={icon}>
-                                                <img src={`../icons/${icon}.svg`} alt={`Icon ${icon}`} />
-                                            </div>
-                                        ))}
+        <>
+            < Description />
+            <h1 className='project-title'>Mes projets</h1>
+            <div className="button-filter">
+                <button className='button-nav' onClick={() => setFilter('all')}>Tous</button>
+                <button className='button-nav' onClick={() => setFilter('formation')}>Formation</button>
+                <button className='button-nav' onClick={() => setFilter('pro')}>Pro</button>
+                <button className='button-nav' onClick={() => setFilter('perso')}>Perso</button>
+            </div>
+            <div className='cards-container-container'>
+                <div className="cards-container">
+                    {projects
+                        .filter(project => filter === 'all' || project.type === filter)
+                        .sort((a, b) => b.date - a.date)
+                        .map((project) => (
+                            <div className="card fadein" key={`${project.id}-${filter}`}>
+                                {isEditingProject(project) ? (
+                                    < ManipulateCard isEditingProject={isEditingProject} project={project} onClose={onClose} storage={storage} deleteImages={deleteImages} setProjects={setProjects} />
+                                ) : (
+                                    <>
+                                        {isDeletingProject(project) && < DeleteCard onClose={onClose} deleteProject={deleteProject} />}
+                                        <div className="card-type-edit-delete-icons">
+                                            <p className='project-type'>{project.type}</p>
+                                            {isAuthenticated && !editingProject && !deletingProject && !isAddCardClicked &&
+                                                <>
+                                                    <i className="fa-solid fa-pen-to-square" onClick={() => handleEditClick(project)}></i>
+                                                    <i className="fa-solid fa-circle-xmark" onClick={() => handleDeleteClick(project)}></i>
+                                                </>
+                                            }
+                                        </div>
+                                        <p>{formatDate(project.date)}</p>
+                                        <h1>{project.title}</h1>
+                                        <p className='card-desc'>{project.description}</p>
+                                        <div className='icons-container'>
+                                            {project.tech
+                                                .sort()
+                                                .map((icon) => (
+                                                    <div className="icons-select" aria-label={`${icon}`} key={icon}>
+                                                        <img src={`../icons/${icon}.svg`} alt={`Icon ${icon}`} />
+                                                    </div>
+                                                ))}
+                                        </div>
+                                        <div className='peripherals-container'>
+                                            {Object.keys(project.images)
+                                                .sort()
+                                                .map((desktopOrMobile) => (
+                                                    <div className={`${desktopOrMobile}-container`} key={desktopOrMobile}>
+                                                        <div className={`peripheral-screen ${desktopOrMobile === 'mobile' ? 'mobile' : ''}`}>
+                                                            {desktopOrMobile === 'mobile' && <div className={`${desktopOrMobile}-top-bar`}></div>}
+                                                            <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} Screen`} />
+                                                        </div>
+                                                        <div className={`${desktopOrMobile}-detail`}></div>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                        <div className="links-container">
+                                            {project.githublink !== '' &&
+                                                <a className="link-icon" href={project.githublink} target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-github"></i></a>}
+                                            {project.weblink !== '' &&
+                                                <a className="link-icon" href={project.weblink} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-globe"></i></a>}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        ))
+                    }
+                    {isAuthenticated && !editingProject && !deletingProject && (
+                        <div className='card-add-container'>
+                            {isAddCardClicked ? (
+                                <div className="card">
+                                    <ManipulateCard isEditingProject={isEditingProject} onClose={onClose} setProjects={setProjects} setIsAddCardClicked={setIsAddCardClicked} />
                                 </div>
-                                <div className='peripherals-container'>
-                                    {Object.keys(project.images)
-                                        .sort()
-                                        .map((desktopOrMobile) => (
-                                            <div className={`${desktopOrMobile}-container`} key={desktopOrMobile}>
-                                                <div className={`peripheral-screen ${desktopOrMobile === 'mobile' ? 'mobile' : ''}`}>
-                                                    {desktopOrMobile === 'mobile' && <div className={`${desktopOrMobile}-top-bar`}></div>}
-                                                    <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} Screen`} />
-                                                </div>
-                                                <div className={`${desktopOrMobile}-detail`}></div>
-                                            </div>
-                                        ))
-                                    }
+                            ) : (
+                                <div className="card add" onClick={handleAddCard}>
+                                    <i className="fa-solid fa-plus"></i>
                                 </div>
-                                <div className="links-container">
-                                    {project.githublink !== '' &&
-                                        <a className="link-icon" href={project.githublink} target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-github"></i></a>}
-                                    {project.weblink !== '' &&
-                                        <a className="link-icon" href={project.weblink} target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-globe"></i></a>}
-                                </div>
-                            </>
-                        )}
-                    </div>
-                ))
-            }
-            {isAuthenticated && !editingProject && !deletingProject && (
-                <div className='card-add-container'>
-                    {isAddCardClicked ? (
-                        <div className="card">
-                            <ManipulateCard isEditingProject={isEditingProject} onClose={onClose} setProjects={setProjects} setIsAddCardClicked={setIsAddCardClicked} />
-                        </div>
-                    ) : (
-                        <div className="card add" onClick={handleAddCard}>
-                            <i className="fa-solid fa-plus"></i>
+                            )}
                         </div>
                     )}
                 </div>
-            )}
-        </div>
+            </div>
+            <ContactForm />
+        </>
     )
 }

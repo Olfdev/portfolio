@@ -1,14 +1,14 @@
-import { useRef, useState, useEffect } from 'react'
-import { addDoc, doc, updateDoc } from '@firebase/firestore'
-import { collref, imagesRef } from '../firebase/firebase'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import {useRef, useState, useEffect} from 'react'
+import {addDoc, doc, updateDoc} from '@firebase/firestore'
+import {collref, imagesRef} from '../firebase/firebase'
+import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import DatePicker from 'react-datepicker'
-import { registerLocale } from 'react-datepicker'
+import {registerLocale} from 'react-datepicker'
 import fr from 'date-fns/locale/fr'
 import iconsData from '../icons.json'
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function ManipulateCard({ isEditingProject, onClose, setProjects, setIsAddCardClicked, project, deleteImages, storage }) {
+export default function ManipulateCard({isEditingProject, onClose, setProjects, setIsAddCardClicked, project, deleteImages, storage}) {
     const icons = iconsData.icons
     registerLocale('fr', fr)
 
@@ -24,6 +24,7 @@ export default function ManipulateCard({ isEditingProject, onClose, setProjects,
     const [isErrorScreenshots, setIsErrorScreenshots] = useState(false)
     const [isOkScreenshots, setIsOkScreenshots] = useState(false)
 
+    const typeRef = useRef()
     const titleRef = useRef()
     const descriptionRef = useRef()
     const delayRef = useRef()
@@ -43,6 +44,7 @@ export default function ManipulateCard({ isEditingProject, onClose, setProjects,
 
                 setSelectedIcons(project.tech || [])
 
+                typeRef.current.value = project.type
                 titleRef.current.value = project.title
                 descriptionRef.current.value = project.description
                 weblinkRef.current.value = project.weblink
@@ -65,12 +67,14 @@ export default function ManipulateCard({ isEditingProject, onClose, setProjects,
             setIsLoading(true)
             const delayInSeconds = parseFloat(delay) * 1000
             url = addHttpWww(url)
-            const response = await fetch('http://192.168.0.111:3001/', {
+            //const response = await fetch('http://192.168.0.111:3001/screenshots', {
+            const response = await fetch('https://us-central1-flo-portfolio.cloudfunctions.net/emailAndScreenshots/screenshots', {
+                //const response = await fetch('http://localhost:5001/emailAndScreenshots/screenshots', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ url, delay: delayInSeconds }),
+                body: JSON.stringify({url, delay: delayInSeconds}),
             })
 
             if (response.ok) {
@@ -130,7 +134,6 @@ export default function ManipulateCard({ isEditingProject, onClose, setProjects,
 
         // Wait for both uploads to complete
         await Promise.all([desktopUploadTask, mobileUploadTask]);
-
 
         // Get download URLs for the new images
         [desktopDownloadURL, mobileDownloadURL] = await Promise.all([desktopImageRef, mobileImageRef].map(ref => getDownloadURL(ref)));
@@ -201,6 +204,7 @@ export default function ManipulateCard({ isEditingProject, onClose, setProjects,
             // Construct the data object
             const data = {
                 date: date.getTime(),
+                type: typeRef.current.value,
                 title: titleRef.current.value,
                 description: descriptionRef.current.value,
                 images: {
@@ -223,7 +227,7 @@ export default function ManipulateCard({ isEditingProject, onClose, setProjects,
                 // Update the state with the edited project data
                 setProjects((prevProjects) =>
                     prevProjects.map((prevProject) =>
-                        prevProject.id === project.id ? { id: project.id, ...data } : prevProject
+                        prevProject.id === project.id ? {id: project.id, ...data} : prevProject
                     )
                 )
                 console.log('Project updated successfully')
@@ -252,22 +256,34 @@ export default function ManipulateCard({ isEditingProject, onClose, setProjects,
 
     return (
         <>
-            <form className="form-admin" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-                <DatePicker
-                    className='input p'
-                    locale="fr"
-                    selected={date}
-                    onChange={(selectedDate) => setDate(selectedDate)}
-                    dateFormat="MMMM yyyy"
-                    placeholderText="Date"
-                />
+            <form className="form-admin" onSubmit={(e) => {e.preventDefault(); handleSubmit();}}>
+                <div className='date-type'>
+                    <DatePicker
+                        className='input p'
+                        locale="fr"
+                        selected={date}
+                        onChange={(selectedDate) => setDate(selectedDate)}
+                        dateFormat="MMMM yyyy"
+                        placeholderText="Date"
+                    />
+                    <select
+                        className="project-type"
+                        id="status"
+                        name="status"
+                        ref={typeRef}
+                    >
+                        <option value="perso">perso</option>
+                        <option value="pro">pro</option>
+                        <option value="formation">formation</option>
+                    </select>
+                </div>
                 <input className="input h1" type="text" ref={titleRef} placeholder="Title" />
                 <textarea rows="3" className='input p card-desc' type="text" maxLength="322" ref={descriptionRef} placeholder="Description" />
                 <div className='icons-container admin'>
                     {icons
                         .sort()
                         .map((icon, index) => (
-                            <div className='icons-select admin' key={index} onClick={() => handleIconClick(icon)} style={{ backgroundColor: selectedIcons.includes(icon) ? '#fff' : 'transparent' }}>
+                            <div className='icons-select admin' key={index} onClick={() => handleIconClick(icon)} style={{backgroundColor: selectedIcons.includes(icon) ? '#fff' : 'transparent'}}>
                                 <img src={`/icons/${icon}.svg`} alt={`${icon} Icon`} />
                             </div>
                         ))}

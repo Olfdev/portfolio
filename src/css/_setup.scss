@@ -3,6 +3,7 @@
 $lightblue: #2e5e9f;
 $mediumblue: #274f85;
 $darkblue: #183153;
+$transparentdarkblue: #00000029;
 
 * {
     font-family: 'Varela Round', sans-serif;
@@ -44,10 +45,17 @@ ul {
 
 body {
     color: #fff;
-    background-color: $darkblue;
+    //background-color: $darkblue;
+    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(39, 83, 142, 1) 35%, rgba(24, 49, 83, 1) 100%);
+    background-repeat-y: no-repeat;
     max-width: 1800px;
+    min-height: 100vh;
     margin-right: auto;
     margin-left: auto;
+}
+
+.loading {
+    margin: auto;
 }
 
 .react-datepicker {

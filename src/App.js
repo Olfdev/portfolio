@@ -33,27 +33,23 @@ export default function App() {
     return () => unsubscribe()
   }, [])
 
-  if (isLoading) {
-    // Return loading UI until authentication check is complete
-    return <h1>Loading...</h1>
-  }
-
   return (
-    <Router>
-      <Header isAuthenticated={isAuthenticated} userName={userName} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/admin"
-          element={isAuthenticated ? <Home /> : <Login />}
-        />
-        <Route path="*" element={<Error />} />
-        <Route
-          path="/name"
-          element={isAuthenticated ? <Name /> : <Login />}
-        />
-      </Routes>
-      <Footer />
-    </Router>
-  )
+    isLoading ? (<h1 className='loading'>Loading...</h1>) : (
+      <Router>
+        <Header isAuthenticated={isAuthenticated} userName={userName} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/admin"
+            element={isAuthenticated ? <Home /> : <Login />}
+          />
+          <Route path="*" element={<Error />} />
+          <Route
+            path="/name"
+            element={isAuthenticated ? <Name /> : <Login />}
+          />
+        </Routes>
+        <Footer />
+      </Router>
+    ))
 }

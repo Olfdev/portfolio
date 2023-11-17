@@ -42,7 +42,9 @@
 
 .button-screenshots,
 .button-ok,
-.button-signout {
+.button-signout,
+.button-nav,
+.button-social {
     background-color: setup.$darkblue;
     border: none;
     border-radius: 1em;
@@ -53,7 +55,7 @@
     grid-column: 2/span 2;
 
     &:hover {
-        background-color: #0d1c2f;
+        background-color: #0d1c2f !important;
     }
 
     &:disabled {
@@ -106,4 +108,35 @@
 
 .button-signout {
     width: auto;
+}
+
+.button-nav {
+    background-color: transparent;
+    display: flex;
+    width: auto;
+    padding-inline: 1rem;
+    font-size: smaller;
+}
+
+.button-filter {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    margin-block: 4rem;
+    font-size: larger;
+}
+
+.contact-button-container {
+    margin: auto;
+    padding: 1rem;
+    width: fit-content;
+}
+
+.button-contact {
+    background: setup.$transparentdarkblue;
+    padding-inline: 3rem;
+
+    & i {
+        color: #fff;
+    }
 }

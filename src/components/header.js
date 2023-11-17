@@ -1,3 +1,5 @@
+import Navbar from './navbar'
+import Social from './social'
 import { getAuth, signOut } from 'firebase/auth'
 import React from 'react'
 
@@ -16,7 +18,7 @@ export default function Header({ isAuthenticated, userName }) {
 
     return (
         <header>
-            <h1>Bienvenue sur mon Portfolio</h1>
+            {/* <h1>Bienvenue sur mon Portfolio</h1> */}
             {isAuthenticated &&
                 <>
                     <div className='user-container'>
@@ -27,6 +29,10 @@ export default function Header({ isAuthenticated, userName }) {
                     </div>
                 </>
             }
+            <div className='header'>
+                <Navbar />
+                <Social />
+            </div>
         </header>
     )
 }
