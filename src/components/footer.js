@@ -1,4 +1,4 @@
-export default function dummy_footer() {
+export default function footer() {
 
     return (
         <footer>

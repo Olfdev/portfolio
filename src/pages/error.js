@@ -1,7 +1,7 @@
-export default function dummy_error() {
-    const dummy_error = "Error Page"
+export default function error() {
+    const error = "Error Page"
 
     return (
-        <p>{dummy_error}</p>
+        <p>{error}</p>
     )
 }
