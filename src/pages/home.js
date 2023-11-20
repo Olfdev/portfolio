@@ -81,7 +81,7 @@ export default function Home() {
     return (
         <>
             < Description />
-            <h1 className='project-title'>Mes projets</h1>
+            <h1 id="projects" className='project-title'>Mes projets</h1>
             <div className="button-filter">
                 <button className='button-nav' onClick={() => setFilter('all')}>Tous</button>
                 <button className='button-nav' onClick={() => setFilter('formation')}>Formation</button>

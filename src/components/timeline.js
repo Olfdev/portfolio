@@ -2,7 +2,7 @@ export default function timeline() {
 
     return (
         <>
-            <div className="timeline">
+            <div className="timeline" id="experience">
                 <article>
                     <h2>Enzyme Testing Labs</h2>
                     <p>Testeur linguistique</p>
@@ -34,7 +34,9 @@ export default function timeline() {
                     <p>2023</p>
                 </article>
             </div>
-            <a className="cv" href="/cv/Florent_Ducret_CV_2023.pdf">👉 Télécharger mon CV 👈</a>
+            <div className="cv">
+                <a href="/cv/Florent_Ducret_CV_2023.pdf">👉 Télécharger mon CV 👈</a>
+            </div>
         </>
     )
 }
