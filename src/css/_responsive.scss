@@ -1,0 +1,69 @@
+@use 'setup';
+
+//card
+@media (max-width: 1730px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1130px) {
+    .cards-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .card {
+        height: auto;
+    }
+
+    .peripherals-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+//contact
+@media (max-width: 615px) {
+    .form-container {
+        padding: 0;
+
+        & h1 {
+            font-size: larger;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: auto;
+    }
+}
+
+//description
+@media (max-width: 768px) {
+    section p {
+        text-align: justify;
+    }
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 3rem 2rem;
+    }
+}
+
+//header
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column-reverse;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .navbar {
+        font-size: medium;
+    }
+}

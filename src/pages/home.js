@@ -125,13 +125,15 @@ export default function Home() {
                                             {Object.keys(project.images)
                                                 .sort()
                                                 .map((desktopOrMobile) => (
-                                                    <div className={`${desktopOrMobile}-container`} key={desktopOrMobile}>
-                                                        <div className={`peripheral-screen ${desktopOrMobile === 'mobile' ? 'mobile' : ''}`}>
-                                                            {desktopOrMobile === 'mobile' && <div className={`${desktopOrMobile}-top-bar`}></div>}
-                                                            <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} Screen`} />
+                                                    (desktopOrMobile === 'desktop' && project.displayDesktop) || (desktopOrMobile === 'mobile' && project.displayMobile) ? (
+                                                        <div className={`${desktopOrMobile}-container nopointer`} key={desktopOrMobile}>
+                                                            <div className={`peripheral-screen ${desktopOrMobile === 'mobile' ? 'mobile' : ''}`}>
+                                                                {desktopOrMobile === 'mobile' && <div className={`${desktopOrMobile}-top-bar`}></div>}
+                                                                <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} Screen`} />
+                                                            </div>
+                                                            <div className={`${desktopOrMobile}-detail`}></div>
                                                         </div>
-                                                        <div className={`${desktopOrMobile}-detail`}></div>
-                                                    </div>
+                                                    ) : null
                                                 ))
                                             }
                                         </div>

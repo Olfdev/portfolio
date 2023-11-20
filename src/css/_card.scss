@@ -13,6 +13,7 @@
     background: #183153;
     min-width: 3rem;
     text-align: center;
+    margin-block: auto;
 }
 
 .cards-container-container {
@@ -26,30 +27,21 @@
     //flex-wrap: wrap;
     //justify-content: flex-start;
     display: grid;
+    gap: 4rem;
     grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 1730px) {
-    .cards-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 1130px) {
-    .cards-container {
-        grid-template-columns: repeat(1, 1fr);
-    }
 }
 
 .card {
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 532px;
+    /* width: 532px; */
+    max-width: 532px;
+    min-width: -webkit-fill-available;
     height: 940px;
-    background-color: setup.$lightblue;
+    background-color: #2e5e9f;
     border-radius: 1rem;
-    margin: 2rem;
+    /* margin-block: 2rem; */
     padding: 1rem;
     overflow-wrap: break-word;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -149,6 +141,7 @@
 .date-type {
     display: flex;
     justify-content: space-between;
+    height: 20px;
 }
 
 input::placeholder,
@@ -204,6 +197,15 @@ textarea::placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
+
+    &.nopointer {
+        cursor: auto;
+    }
+
+    &.unchecked {
+        opacity: 10%;
+    }
 }
 
 .desktop-detail {
@@ -219,6 +221,15 @@ textarea::placeholder {
     width: fit-content;
     display: flex;
     justify-content: center;
+    cursor: pointer;
+
+    &.nopointer {
+        cursor: auto;
+    }
+
+    &.unchecked {
+        opacity: 10%;
+    }
 }
 
 .mobile-detail {
@@ -299,7 +310,9 @@ select {
 
 .login-card-container {
     display: flex;
+    max-width: 532px;
     justify-content: center;
+    margin: auto;
 }
 
 .login-title {

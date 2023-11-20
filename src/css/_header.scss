@@ -12,13 +12,6 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column-reverse;
-        gap: 3rem;
-    }
-}
-
 footer {
     display: block;
     text-align: center;

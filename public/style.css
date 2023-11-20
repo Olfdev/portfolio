@@ -105,12 +105,6 @@ footer h2 {
   font-size: larger;
 }
 
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column-reverse;
-    gap: 3rem;
-  }
-}
 footer {
   display: block;
   text-align: center;
@@ -135,18 +129,13 @@ footer {
 }
 
 section {
-  padding: 3rem;
-  margin: 2rem 5rem 5rem;
+  padding: 3rem 5rem;
+  margin: 2rem 0 5rem;
 }
 section h1 {
   font-size: xxx-large;
 }
 
-@media (max-width: 768px) {
-  section {
-    margin: 2rem 0 5rem;
-  }
-}
 .description-container {
   display: flex;
   align-items: center;
@@ -180,6 +169,7 @@ section h1 {
   background: #183153;
   min-width: 3rem;
   text-align: center;
+  margin-block: auto;
 }
 
 .cards-container-container {
@@ -190,28 +180,21 @@ section h1 {
 
 .cards-container {
   display: grid;
+  gap: 4rem;
   grid-template-columns: repeat(3, 1fr);
 }
 
-@media (max-width: 1730px) {
-  .cards-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 1130px) {
-  .cards-container {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
 .card {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 532px;
+  /* width: 532px; */
+  max-width: 532px;
+  min-width: -webkit-fill-available;
   height: 940px;
   background-color: #2e5e9f;
   border-radius: 1rem;
-  margin: 2rem;
+  /* margin-block: 2rem; */
   padding: 1rem;
   overflow-wrap: break-word;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -300,6 +283,7 @@ section h1 {
 .date-type {
   display: flex;
   justify-content: space-between;
+  height: 20px;
 }
 
 input::placeholder,
@@ -352,6 +336,13 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+}
+.desktop-container.nopointer {
+  cursor: auto;
+}
+.desktop-container.unchecked {
+  opacity: 10%;
 }
 
 .desktop-detail {
@@ -367,6 +358,13 @@ textarea::placeholder {
   width: fit-content;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+}
+.mobile-container.nopointer {
+  cursor: auto;
+}
+.mobile-container.unchecked {
+  opacity: 10%;
 }
 
 .mobile-detail {
@@ -441,7 +439,9 @@ select option {
 }
 .login-card-container {
   display: flex;
+  max-width: 532px;
   justify-content: center;
+  margin: auto;
 }
 
 .login-title {
@@ -612,15 +612,18 @@ select option {
 
 .button-nav {
   background-color: transparent;
-  display: flex;
   width: auto;
   padding-inline: 1rem;
   font-size: smaller;
+}
+.button-nav a {
+  display: flex;
 }
 
 .button-filter {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 5rem;
   margin-block: 4rem;
   font-size: larger;
@@ -642,18 +645,14 @@ select option {
 
 .form-container {
   padding: 4rem;
-  width: 772px;
+  max-width: 772px;
+  min-width: auto;
   margin: auto;
 }
 .form-container h1 {
   text-align: center;
 }
 
-@media (max-width: 768px) {
-  .form-container {
-    width: auto;
-  }
-}
 .fields-container {
   padding: 1rem;
   margin-block: 1rem;
@@ -697,6 +696,8 @@ select option {
 
 .timeline {
   position: relative;
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
   padding: 40px 60px;
   background: #2e5e9f;
@@ -728,7 +729,7 @@ select option {
   display: inline-block;
   position: relative;
   width: auto;
-  height: 70px;
+  height: 100px;
   padding: 10px;
   margin: 0 0 50px 0;
   vertical-align: top;
@@ -762,7 +763,7 @@ select option {
 }
 
 .timeline article:nth-child(even) {
-  margin-top: 140px;
+  margin-top: 168px;
   margin-bottom: 0;
 }
 
@@ -783,6 +784,60 @@ select option {
 .timeline article h2 {
   font-size: 22px;
   margin: 0;
+}
+
+@media (max-width: 1730px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 1130px) {
+  .cards-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  .card {
+    height: auto;
+  }
+  .peripherals-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (max-width: 615px) {
+  .form-container {
+    padding: 0;
+  }
+  .form-container h1 {
+    font-size: larger;
+  }
+}
+@media (max-width: 768px) {
+  .form-container {
+    width: auto;
+  }
+}
+@media (max-width: 768px) {
+  section p {
+    text-align: justify;
+  }
+}
+@media (max-width: 600px) {
+  section {
+    padding: 3rem 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column-reverse;
+    gap: 3rem;
+  }
+}
+@media (max-width: 450px) {
+  .navbar {
+    font-size: medium;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -2,17 +2,12 @@
 
 .form-container {
     padding: 4rem;
-    width: 772px;
+    max-width: 772px;
+    min-width: auto;
     margin: auto;
 
     & h1 {
         text-align: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .form-container {
-        width: auto;
     }
 }
 

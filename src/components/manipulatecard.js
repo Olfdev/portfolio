@@ -15,6 +15,9 @@ export default function ManipulateCard({isEditingProject, onClose, setProjects, 
     const [desktopScreenshot, setDesktopScreenshot] = useState(null)
     const [mobileScreenshot, setMobileScreenshot] = useState(null)
 
+    const [isDesktopChecked, setIsDesktopChecked] = useState(true)
+    const [isMobileChecked, setIsMobileChecked] = useState(true)
+
     const [desktopScreenshotSource, setDesktopScreenshotSource] = useState('url')
     const [mobileScreenshotSource, setMobileScreenshotSource] = useState('url')
 
@@ -34,6 +37,9 @@ export default function ManipulateCard({isEditingProject, onClose, setProjects, 
     useEffect(() => {
         if (isEditingProject(project)) {
             if ((project)) {
+                setIsDesktopChecked(project.displayDesktop)
+                setIsMobileChecked(project.displayMobile)
+
                 setDesktopScreenshot(project.images.desktop)
                 setMobileScreenshot(project.images.mobile)
 
@@ -207,6 +213,8 @@ export default function ManipulateCard({isEditingProject, onClose, setProjects, 
                 type: typeRef.current.value,
                 title: titleRef.current.value,
                 description: descriptionRef.current.value,
+                displayDesktop: isDesktopChecked,
+                displayMobile: isMobileChecked,
                 images: {
                     desktop: desktopDownloadURL,
                     mobile: mobileDownloadURL,
@@ -289,7 +297,10 @@ export default function ManipulateCard({isEditingProject, onClose, setProjects, 
                         ))}
                 </div>
                 <div className='peripherals-container'>
-                    <div className='desktop-container'>
+                    {/* <input type="checkbox" checked={isDesktopChecked} onChange={() => setIsDesktopChecked(!isDesktopChecked)} /> */}
+                    {/* <input type="checkbox" checked={isMobileChecked} onChange={() => setIsMobileChecked(!isMobileChecked)} /> */}
+                    <div className={`desktop-container ${isDesktopChecked ? '' : 'unchecked'}`} onClick={() => setIsDesktopChecked(!isDesktopChecked)}>
+                        {/* <div className='desktop-container'> */}
                         <div className='peripheral-screen'>
                             {desktopScreenshot && (
                                 <img
@@ -307,7 +318,8 @@ export default function ManipulateCard({isEditingProject, onClose, setProjects, 
                         </div>
                         <div className='desktop-detail'></div>
                     </div>
-                    <div className='mobile-container'>
+                    <div className={`mobile-container ${isMobileChecked ? '' : 'unchecked'}`} onClick={() => setIsMobileChecked(!isMobileChecked)}>
+                        {/* <div className='mobile-container'> */}
                         <div className='peripheral-screen mobile'>
                             <div className='mobile-top-bar'></div>
                             {mobileScreenshot && (

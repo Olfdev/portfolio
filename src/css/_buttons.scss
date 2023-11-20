@@ -112,15 +112,19 @@
 
 .button-nav {
     background-color: transparent;
-    display: flex;
     width: auto;
     padding-inline: 1rem;
     font-size: smaller;
+
+    & a {
+        display: flex;
+    }
 }
 
 .button-filter {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 5rem;
     margin-block: 4rem;
     font-size: larger;
