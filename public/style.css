@@ -37,8 +37,7 @@ ul {
 
 body {
   color: #fff;
-  background: linear-gradient(180deg, rgb(2, 0, 36) 0%, rgb(39, 83, 142) 35%, rgb(24, 49, 83) 100%);
-  background-repeat-y: no-repeat;
+  background-color: #091038;
   max-width: 1800px;
   min-height: 100vh;
   margin-right: auto;
@@ -784,6 +783,20 @@ select option {
 .timeline article h2 {
   font-size: 22px;
   margin: 0;
+}
+
+.error {
+  font-size: 10rem;
+  text-align: center;
+}
+
+.error-home {
+  text-align: center;
+}
+
+.error-oops {
+  margin-bottom: 10rem;
+  text-align: center;
 }
 
 @media (max-width: 1730px) {
