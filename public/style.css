@@ -781,11 +781,11 @@ select option {
 }
 
 .timeline article h2 {
-  font-size: 22px;
+  font-size: 1.5rem;
   margin: 0;
 }
 
-.error {
+.error-page {
   font-size: 10rem;
   text-align: center;
 }
@@ -850,6 +850,61 @@ select option {
 @media (max-width: 450px) {
   .navbar {
     font-size: medium;
+  }
+}
+@media (max-width: 1680px) {
+  .timeline article h2 {
+    font-size: 1rem;
+  }
+  .timeline article p {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 1300px) {
+  .timeline article h2 {
+    font-size: 0.7rem;
+  }
+  .timeline article p {
+    font-size: 0.7rem;
+  }
+}
+@media (max-width: 835px) {
+  .timeline article::before,
+  .timeline article:nth-child(even)::before {
+    top: 35%;
+    left: -15px;
+    transform: translateY(50%);
+  }
+  .timeline article::after,
+  .timeline article:nth-child(even)::after {
+    top: 35%;
+    left: -20px;
+    right: 50%;
+    border-left: 20px solid #eeeeee;
+    border-bottom: 16px solid transparent;
+    border-top: 16px solid transparent;
+  }
+  .timeline article:nth-child(even) {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .timeline:after {
+    height: 90%;
+    width: 8px;
+    left: 49px;
+  }
+  .timeline {
+    flex-direction: column;
+  }
+  .timeline article {
+    margin: unset;
+    height: unset;
+  }
+  .timeline article h2 {
+    font-size: 1rem;
+  }
+  .timeline article p {
+    font-size: 1rem;
   }
 }
 
