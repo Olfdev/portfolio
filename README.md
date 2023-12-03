@@ -1,6 +1,6 @@
-My Portfolio, made with React and deployed to Firebase.
+My Portfolio, made with React, SASS and deployed to Firebase.
 
-For evaluation and testing purposes, you can find an account that'll let you create/edit/delete projects:
+For evaluation and testing purposes, you can find an account that will let you create/edit/delete projects:
 
 ## Test account with Admin privileges
 
