@@ -4,6 +4,6 @@ For evaluation and testing purposes, you can find an account that'll let you cre
 
 ## Test account with Admin privileges
 
-admin login URL: https://flo.paris/admin
-email: test@est.com
+admin login URL: https://flo.paris/admin  
+email: test@est.com  
 password: test1234
