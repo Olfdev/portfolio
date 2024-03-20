@@ -41,7 +41,7 @@ export default function timeline() {
                 </article>
             </div>
             <div className="cv">
-                <a href="/cv/CV_Florent Ducret_2024.pdf">👉 Télécharger mon CV 👈</a>
+                <a href="/cv/CV_Florent_Ducret_2024.pdf">👉 Télécharger mon CV 👈</a>
             </div>
         </>
     )
