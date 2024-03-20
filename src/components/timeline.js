@@ -35,13 +35,13 @@ export default function timeline() {
                 </article>
                 <article>
                     <h2>Formation Openclassrooms</h2>
-                    <p>Intégrateur Web</p>
+                    <p>Diplômé niv. 5 - Développeur Web</p>
                     <p>Paris - France</p>
                     <p>2023</p>
                 </article>
             </div>
             <div className="cv">
-                <a href="/cv/Florent_Ducret_CV_2023.pdf">👉 Télécharger mon CV 👈</a>
+                <a href="/cv/CV_Florent Ducret_2024.pdf">👉 Télécharger mon CV 👈</a>
             </div>
         </>
     )
