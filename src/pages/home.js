@@ -1,4 +1,5 @@
 import Description from '../components/description'
+import Modal from '../components/modal'
 import {formatDate} from '../utils/formatdate'
 import DeleteCard from '../components/deletecard'
 import ManipulateCard from '../components/manipulatecard'
@@ -20,6 +21,15 @@ export default function Home() {
     const [isAddCardClicked, setIsAddCardClicked] = useState(false)
     const [editingProject, setEditingProject] = useState(null)
     const [deletingProject, setDeletingProject] = useState(null)
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState('');
+
+    // Function to handle opening the modal with the clicked image
+    const openModal = (imageUrl) => {
+        setSelectedImage(imageUrl);
+        setModalOpen(true);
+    };
 
     useEffect(() => {
         getDocs(collref)
@@ -129,7 +139,8 @@ export default function Home() {
                                                         <div className={`${desktopOrMobile}-container nopointer`} key={desktopOrMobile}>
                                                             <div className={`peripheral-screen ${desktopOrMobile === 'mobile' ? 'mobile' : ''}`}>
                                                                 {desktopOrMobile === 'mobile' && <div className={`${desktopOrMobile}-top-bar`}></div>}
-                                                                <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} Screen`} />
+                                                                {/* <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} Screen`} /> */}
+                                                                <img src={project.images[desktopOrMobile]} alt={`${desktopOrMobile} Screen`} onClick={() => openModal(project.images[desktopOrMobile])} className="zoom-in" />
                                                             </div>
                                                             <div className={`${desktopOrMobile}-detail`}></div>
                                                         </div>
@@ -164,6 +175,7 @@ export default function Home() {
                 </div>
             </div>
             <ContactForm />
+            <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} imageUrl={selectedImage} />
         </>
     )
 }

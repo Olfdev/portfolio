@@ -312,7 +312,9 @@ textarea::placeholder {
 }
 .peripheral-screen img {
   height: 100%;
-  pointer-events: none;
+}
+.peripheral-screen .zoom-in {
+  cursor: zoom-in;
 }
 .peripheral-screen.mobile {
   border-width: 0.5rem;
@@ -497,6 +499,24 @@ select option {
 .icons-select img {
   width: 35px;
   pointer-events: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  /* semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content img {
+  height: 50em;
+  border-radius: 8px;
 }
 
 .signout-btn {
@@ -817,8 +837,12 @@ select option {
     flex-direction: column;
     align-items: center;
   }
+  .peripheral-screen img {
+    pointer-events: none;
+    cursor: auto;
+  }
 }
-@media (max-width: 615px) {
+@media (max-width: 500px) and (max-width: 615px) {
   .form-container {
     padding: 0;
   }
@@ -826,33 +850,33 @@ select option {
     font-size: larger;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 500px) and (max-width: 768px) {
   .form-container {
     width: auto;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 500px) and (max-width: 768px) {
   section p {
     text-align: justify;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) and (max-width: 600px) {
   section {
     padding: 3rem 2rem;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 500px) and (max-width: 768px) {
   .header {
     flex-direction: column-reverse;
     gap: 3rem;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 500px) and (max-width: 450px) {
   .navbar {
     font-size: medium;
   }
 }
-@media (max-width: 1680px) {
+@media (max-width: 500px) and (max-width: 1680px) {
   .timeline article h2 {
     font-size: 1rem;
   }
@@ -860,7 +884,7 @@ select option {
     font-size: 1rem;
   }
 }
-@media (max-width: 1300px) {
+@media (max-width: 500px) and (max-width: 1300px) {
   .timeline article h2 {
     font-size: 0.7rem;
   }
@@ -868,7 +892,7 @@ select option {
     font-size: 0.7rem;
   }
 }
-@media (max-width: 835px) {
+@media (max-width: 500px) and (max-width: 835px) {
   .timeline article::before,
   .timeline article:nth-child(even)::before {
     top: 35%;

@@ -22,117 +22,124 @@
         flex-direction: column;
         align-items: center;
     }
-}
 
-//contact
-@media (max-width: 615px) {
-    .form-container {
-        padding: 0;
-
-        & h1 {
-            font-size: larger;
+    .peripheral-screen {
+        img {
+            pointer-events: none;
+            cursor: auto;
         }
     }
-}
 
-@media (max-width: 768px) {
-    .form-container {
-        width: auto;
-    }
-}
+    //contact
+    @media (max-width: 615px) {
+        .form-container {
+            padding: 0;
 
-//description
-@media (max-width: 768px) {
-    section p {
-        text-align: justify;
-    }
-}
-
-@media (max-width: 600px) {
-    section {
-        padding: 3rem 2rem;
-    }
-}
-
-//header
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column-reverse;
-        gap: 3rem;
-    }
-}
-
-@media (max-width: 450px) {
-    .navbar {
-        font-size: medium;
-    }
-}
-
-//timeline
-@media (max-width: 1680px) {
-    .timeline article h2 {
-        font-size: 1rem;
+            & h1 {
+                font-size: larger;
+            }
+        }
     }
 
-    .timeline article p {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 1300px) {
-    .timeline article h2 {
-        font-size: 0.7rem;
+    @media (max-width: 768px) {
+        .form-container {
+            width: auto;
+        }
     }
 
-    .timeline article p {
-        font-size: 0.7rem;
-    }
-}
-
-@media (max-width: 835px) {
-
-    .timeline article::before,
-    .timeline article:nth-child(even)::before {
-        top: 35%;
-        left: -15px;
-        transform: translateY(50%);
+    //description
+    @media (max-width: 768px) {
+        section p {
+            text-align: justify;
+        }
     }
 
-    .timeline article::after,
-    .timeline article:nth-child(even)::after {
-        top: 35%;
-        left: -20px;
-        right: 50%;
-        border-left: 20px solid #eeeeee;
-        border-bottom: 16px solid transparent;
-        border-top: 16px solid transparent;
+    @media (max-width: 600px) {
+        section {
+            padding: 3rem 2rem;
+        }
     }
 
-    .timeline article:nth-child(even) {
-        margin-top: 50px;
-        margin-bottom: 50px;
+    //header
+    @media (max-width: 768px) {
+        .header {
+            flex-direction: column-reverse;
+            gap: 3rem;
+        }
     }
 
-    .timeline:after {
-        height: 90%;
-        width: 8px;
-        left: 49px;
+    @media (max-width: 450px) {
+        .navbar {
+            font-size: medium;
+        }
     }
 
-    .timeline {
-        flex-direction: column;
+    //timeline
+    @media (max-width: 1680px) {
+        .timeline article h2 {
+            font-size: 1rem;
+        }
+
+        .timeline article p {
+            font-size: 1rem;
+        }
     }
 
-    .timeline article {
-        margin: unset;
-        height: unset;
+    @media (max-width: 1300px) {
+        .timeline article h2 {
+            font-size: 0.7rem;
+        }
+
+        .timeline article p {
+            font-size: 0.7rem;
+        }
     }
 
-    .timeline article h2 {
-        font-size: 1rem;
-    }
+    @media (max-width: 835px) {
 
-    .timeline article p {
-        font-size: 1rem;
+        .timeline article::before,
+        .timeline article:nth-child(even)::before {
+            top: 35%;
+            left: -15px;
+            transform: translateY(50%);
+        }
+
+        .timeline article::after,
+        .timeline article:nth-child(even)::after {
+            top: 35%;
+            left: -20px;
+            right: 50%;
+            border-left: 20px solid #eeeeee;
+            border-bottom: 16px solid transparent;
+            border-top: 16px solid transparent;
+        }
+
+        .timeline article:nth-child(even) {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .timeline:after {
+            height: 90%;
+            width: 8px;
+            left: 49px;
+        }
+
+        .timeline {
+            flex-direction: column;
+        }
+
+        .timeline article {
+            margin: unset;
+            height: unset;
+        }
+
+        .timeline article h2 {
+            font-size: 1rem;
+        }
+
+        .timeline article p {
+            font-size: 1rem;
+        }
     }
 }

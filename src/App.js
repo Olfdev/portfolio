@@ -4,9 +4,9 @@ import Home from './pages/home'
 import Login from './pages/login'
 import Error from './pages/error'
 import Name from './pages/name'
-import { useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {getAuth, onAuthStateChanged} from 'firebase/auth'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
